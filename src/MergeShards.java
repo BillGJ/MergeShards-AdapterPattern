@@ -16,14 +16,12 @@ public final class MergeShards {
 
         List<Path> inputs = Files.walk(Path.of(args[0]), 1).skip(1).collect(Collectors.toList());
         // Done: Get rid of this List<BufferedReader> and use a MultiFileReader below instead.
-//        List<BufferedReader> readers = new ArrayList<>(inputs.size());
         Path outputPath = Path.of(args[1]);
 
 
         // Done: Replace this try-finally with a try-with-resources. The "try" statement should create
         //       a MultiFileReader that is used in the "try" block to read from the files.
         try(MultiFileReader multiFileReader = new MultiFileReader(inputs)) {
-
 
             PriorityQueue<WordEntry> words = new PriorityQueue<>();
             for (BufferedReader reader : multiFileReader.getReaders()) {
